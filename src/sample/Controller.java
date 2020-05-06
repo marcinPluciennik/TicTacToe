@@ -40,6 +40,7 @@ public class Controller {
             userMove();
         }
     }
+    /*
     public int randomX0or2(){
         int [] array = {0,2};
         int x = new Random().nextInt(array.length);
@@ -53,7 +54,7 @@ public class Controller {
     }
 
 
-    public void computerMove1(){
+    public void computerMove(){
         if (gameTable[1][1].equals(" ")){
             gameTable[1][1] = "O";
         }else{
@@ -62,12 +63,12 @@ public class Controller {
             if (gameTable[x][y].equals(" ")){
                 gameTable[x][y] = "O";
             }else {
-                computerMove1();
+                computerMove();
             }
             gameTable[x][y] = "O";
         }
     }
-
+/*
     public int randomX012(){
         int [] array = {0,1,2};
         int x = new Random().nextInt(array.length);
@@ -90,4 +91,6 @@ public class Controller {
             computerMove2();
         }
     }
+
+ */
 }
