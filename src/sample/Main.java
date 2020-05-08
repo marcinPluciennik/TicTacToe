@@ -12,7 +12,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,9 +23,42 @@ public class Main extends Application {
     private int compMoveColumn;
     private int compMoveRow;
     private int[] compMove = {0,0};
+    private boolean isUserWinner = false;
+    GridPane grid = new GridPane();
+
+    private Button button1 = new Button(" ");
+    private Button button2 = new Button(" ");
+    private Button button3 = new Button(" ");
+    private Button button4 = new Button(" ");
+    private Button button5 = new Button(" ");
+    private Button button6 = new Button(" ");
+    private Button button7 = new Button(" ");
+    private Button button8 = new Button(" ");
+    private Button button9 = new Button(" ");
 
     private Image imageback = new Image ("file:resources/back.png");
-    private Image empty = new Image ("file:resources/empty.png");
+
+    private Image wheel = new Image ("file:resources/kolo.png");
+    private ImageView wheelView1 = new ImageView(wheel);
+    private ImageView wheelView2 = new ImageView(wheel);
+    private ImageView wheelView3 = new ImageView(wheel);
+    private ImageView wheelView4 = new ImageView(wheel);
+    private ImageView wheelView5 = new ImageView(wheel);
+    private ImageView wheelView6 = new ImageView(wheel);
+    private ImageView wheelView7 = new ImageView(wheel);
+    private ImageView wheelView8 = new ImageView(wheel);
+    private ImageView wheelView9 = new ImageView(wheel);
+
+    private Image cross = new Image ("file:resources/krzyzyk.png");
+    private ImageView crossView1 = new ImageView(cross);
+    private ImageView crossView2 = new ImageView(cross);
+    private ImageView crossView3 = new ImageView(cross);
+    private ImageView crossView4 = new ImageView(cross);
+    private ImageView crossView5 = new ImageView(cross);
+    private ImageView crossView6 = new ImageView(cross);
+    private ImageView crossView7 = new ImageView(cross);
+    private ImageView crossView8 = new ImageView(cross);
+    private ImageView crossView9 = new ImageView(cross);
 
     public int random012(){
         int [] array = {0,1,2};
@@ -53,6 +85,106 @@ public class Main extends Application {
         System.out.println("compMoveRow: " + compMoveRow);
     }
 
+    public void userWins() {
+        if ((gameTable[0][0].equals("X") && gameTable[0][1].equals("X") && gameTable[0][2].equals("X")) ||
+                (gameTable[1][0].equals("X") && gameTable[1][1].equals("X") && gameTable[1][2].equals("X")) ||
+                (gameTable[2][0].equals("X") && gameTable[2][1].equals("X") && gameTable[2][2].equals("X")) ||
+                (gameTable[0][0].equals("X") && gameTable[1][0].equals("X") && gameTable[2][0].equals("X")) ||
+                (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals("X")) ||
+                (gameTable[0][2].equals("X") && gameTable[1][2].equals("X") && gameTable[2][2].equals("X")) ||
+                (gameTable[0][0].equals("X") && gameTable[1][1].equals("X") && gameTable[2][2].equals("X")) ||
+                (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals("X"))) {
+            status.setText("CONGRATULATION, YOU WON!");
+            isUserWinner = true;
+            buttonDisable();
+        }
+    }
+
+    public void computerWins(){
+        if((gameTable[0][0].equals("O") && gameTable[0][1].equals("O") && gameTable[0][2].equals("O")) ||
+                (gameTable[1][0].equals("O") && gameTable[1][1].equals("O") && gameTable[1][2].equals("O") ) ||
+                (gameTable[2][0].equals("O") && gameTable[2][1].equals("O") && gameTable[2][2].equals("O") ) ||
+                (gameTable[0][0].equals("O") && gameTable[1][0].equals("O") && gameTable[2][0].equals("O") ) ||
+                (gameTable[0][1].equals("O") && gameTable[1][1].equals("O") && gameTable[2][1].equals("O") ) ||
+                (gameTable[0][2].equals("O") && gameTable[1][2].equals("O") && gameTable[2][2].equals("O") ) ||
+                (gameTable[0][0].equals("O") && gameTable[1][1].equals("O") && gameTable[2][2].equals("O") ) ||
+                (gameTable[0][2].equals("O") && gameTable[1][1].equals("O") && gameTable[2][0].equals("O") )){
+            status.setText("GAME OVER, YOU LOSE!");
+            buttonDisable();
+        }
+    }
+
+    public void tie(){
+        List<String> list = new ArrayList<>();
+        for (int j = 0; j < gameTable.length; j++){
+            for (int k = 0; k < gameTable[j].length; k++){
+                list.add(gameTable[j][k]);
+            }
+        }
+
+        if (list.contains(" ")){
+
+        }else{
+            status.setText("GAME OVER, TIE!");
+            buttonDisable();
+        }
+    }
+
+    public void buttonDisable(){
+        button1.setDisable(true);
+        button2.setDisable(true);
+        button3.setDisable(true);
+        button4.setDisable(true);
+        button5.setDisable(true);
+        button6.setDisable(true);
+        button7.setDisable(true);
+        button8.setDisable(true);
+        button9.setDisable(true);
+    }
+
+    public void buttonAnable(){
+        button1.setDisable(false);
+        button1.setText(" ");
+        button2.setDisable(false);
+        button2.setText(" ");
+        button3.setDisable(false);
+        button3.setText(" ");
+        button4.setDisable(false);
+        button4.setText(" ");
+        button5.setDisable(false);
+        button5.setText(" ");
+        button6.setDisable(false);
+        button6.setText(" ");
+        button7.setDisable(false);
+        button7.setText(" ");
+        button8.setDisable(false);
+        button8.setText(" ");
+        button9.setDisable(false);
+        button9.setText(" ");
+    }
+
+    public void restartGame(){
+        for (int j = 0; j < gameTable.length; j++) {
+            for (int k = 0; k < gameTable[j].length; k++) {
+                gameTable[j][k] = " ";
+            }
+        }
+
+        grid.getChildren().clear();
+
+        grid.add(button1, 0,0);
+        grid.add(button2, 1,0);
+        grid.add(button3, 2,0);
+        grid.add(button4, 0,1);
+        grid.add(button5, 1,1);
+        grid.add(button6, 2,1);
+        grid.add(button7, 0,2);
+        grid.add(button8, 1,2);
+        grid.add(button9, 2,2);
+
+        buttonAnable();
+    }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -64,22 +196,13 @@ public class Main extends Application {
         BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
 
-        GridPane grid = new GridPane();
+        //GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(80,20,10,10));
         grid.setHgap(150);
         grid.setVgap(150);
         //grid.setBackground(background);
 
-        Button button1 = new Button(" ");
-        Button button2 = new Button(" ");
-        Button button3 = new Button(" ");
-        Button button4 = new Button(" ");
-        Button button5 = new Button(" ");
-        Button button6 = new Button(" ");
-        Button button7 = new Button(" ");
-        Button button8 = new Button(" ");
-        Button button9 = new Button(" ");
 
         grid.add(button1, 0,0);
         grid.add(button2, 1,0);
@@ -94,28 +217,38 @@ public class Main extends Application {
         button1.setOnAction((e) -> {
             if (gameTable[0][0].equals(" ")){
                 button1.setText("X");
+                button1.setDisable(true);
                 gameTable[0][0] = "X";
+                crossView1.setFitHeight(20);
+                crossView1.setFitWidth(20);
+                grid.add(crossView1,0,0);
+
+                userWins();
+                tie();
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
 
-                List<String> list = new ArrayList<>();
-                for (int j = 0; j < gameTable.length; j++){
-                    for (int k = 0; k < gameTable[j].length; k++){
-                        list.add(gameTable[j][k]);
+                if (!isUserWinner) {
+                    List<String> list = new ArrayList<>();
+                    for (int j = 0; j < gameTable.length; j++) {
+                        for (int k = 0; k < gameTable[j].length; k++) {
+                            list.add(gameTable[j][k]);
+                        }
                     }
-                }
 
-                if (list.contains(" ")){
-                    computerMove();
-                    Button buttonO1 = new Button("O");
-                    grid.add(buttonO1,compMoveColumn,compMoveRow);
-                    for (int i =0; i<gameTable.length; i++){
-                        System.out.println(Arrays.toString(gameTable[i]));
+                    if (list.contains(" ")) {
+                        computerMove();
+                        wheelView1.setFitWidth(20);
+                        wheelView1.setFitHeight(20);
+                        grid.add(wheelView1, compMoveColumn, compMoveRow);
+                        for (int i = 0; i < gameTable.length; i++) {
+                            System.out.println(Arrays.toString(gameTable[i]));
+                        }
                     }
-                }else{
-                    status.setText("GAME OVER");
                 }
+                computerWins();
+                tie();
 
 
             }
@@ -124,224 +257,296 @@ public class Main extends Application {
         button2.setOnAction((e) -> {
             if (gameTable[0][1].equals(" ")){
                 button2.setText("X");
+                button2.setDisable(true);
                 gameTable[0][1] = "X";
+                crossView2.setFitHeight(20);
+                crossView2.setFitWidth(20);
+                grid.add(crossView2,1,0);
+                userWins();
+                tie();
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
 
-                List<String> list = new ArrayList<>();
-                for (int j = 0; j < gameTable.length; j++){
-                    for (int k = 0; k < gameTable[j].length; k++){
-                        list.add(gameTable[j][k]);
+                if (!isUserWinner) {
+                    List<String> list = new ArrayList<>();
+                    for (int j = 0; j < gameTable.length; j++) {
+                        for (int k = 0; k < gameTable[j].length; k++) {
+                            list.add(gameTable[j][k]);
+                        }
                     }
-                }
 
-                if (list.contains(" ")){
-                    computerMove();
-                    Button buttonO2 = new Button("O");
-                    grid.add(buttonO2,compMoveColumn,compMoveRow);
-                    for (int i =0; i<gameTable.length; i++){
-                        System.out.println(Arrays.toString(gameTable[i]));
+                    if (list.contains(" ")) {
+                        computerMove();
+                        wheelView2.setFitWidth(20);
+                        wheelView2.setFitHeight(20);
+                        grid.add(wheelView2, compMoveColumn, compMoveRow);
+                        for (int i = 0; i < gameTable.length; i++) {
+                            System.out.println(Arrays.toString(gameTable[i]));
+                        }
                     }
-                }else{
-                    status.setText("GAME OVER");
                 }
+                computerWins();
+                tie();
             }
         });
 
         button3.setOnAction((e) -> {
             if (gameTable[0][2].equals(" ")){
                 button3.setText("X");
+                button3.setDisable(true);
                 gameTable[0][2] = "X";
+                crossView3.setFitHeight(20);
+                crossView3.setFitWidth(20);
+                grid.add(crossView3,2,0);
+                userWins();
+                tie();
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
 
-                List<String> list = new ArrayList<>();
-                for (int j = 0; j < gameTable.length; j++){
-                    for (int k = 0; k < gameTable[j].length; k++){
-                        list.add(gameTable[j][k]);
+                if (!isUserWinner) {
+                    List<String> list = new ArrayList<>();
+                    for (int j = 0; j < gameTable.length; j++) {
+                        for (int k = 0; k < gameTable[j].length; k++) {
+                            list.add(gameTable[j][k]);
+                        }
                     }
-                }
 
-                if (list.contains(" ")){
-                    computerMove();
-                    Button buttonO3 = new Button("O");
-                    grid.add(buttonO3,compMoveColumn,compMoveRow);
-                    for (int i =0; i<gameTable.length; i++){
-                        System.out.println(Arrays.toString(gameTable[i]));
+                    if (list.contains(" ")) {
+                        computerMove();
+                        wheelView3.setFitWidth(20);
+                        wheelView3.setFitHeight(20);
+                        grid.add(wheelView3, compMoveColumn, compMoveRow);
+                        for (int i = 0; i < gameTable.length; i++) {
+                            System.out.println(Arrays.toString(gameTable[i]));
+                        }
                     }
-                }else{
-                    status.setText("GAME OVER");
                 }
+                computerWins();
+                tie();
             }
         });
 
         button4.setOnAction((e) -> {
             if (gameTable[1][0].equals(" ")){
                 button4.setText("X");
+                button4.setDisable(true);
                 gameTable[1][0] = "X";
+                crossView4.setFitHeight(20);
+                crossView4.setFitWidth(20);
+                grid.add(crossView4,0,1);
+                userWins();
+                tie();
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
 
-                List<String> list = new ArrayList<>();
-                for (int j = 0; j < gameTable.length; j++){
-                    for (int k = 0; k < gameTable[j].length; k++){
-                        list.add(gameTable[j][k]);
+                if (!isUserWinner) {
+                    List<String> list = new ArrayList<>();
+                    for (int j = 0; j < gameTable.length; j++) {
+                        for (int k = 0; k < gameTable[j].length; k++) {
+                            list.add(gameTable[j][k]);
+                        }
                     }
-                }
 
-                if (list.contains(" ")){
-                    computerMove();
-                    Button buttonO4 = new Button("O");
-                    grid.add(buttonO4,compMoveColumn,compMoveRow);
-                    for (int i =0; i<gameTable.length; i++){
-                        System.out.println(Arrays.toString(gameTable[i]));
+                    if (list.contains(" ")) {
+                        computerMove();
+                        wheelView4.setFitWidth(20);
+                        wheelView4.setFitHeight(20);
+                        grid.add(wheelView4, compMoveColumn, compMoveRow);
+                        for (int i = 0; i < gameTable.length; i++) {
+                            System.out.println(Arrays.toString(gameTable[i]));
+                        }
                     }
-                }else{
-                    status.setText("GAME OVER");
                 }
+                computerWins();
+                tie();
             }
         });
 
         button5.setOnAction((e) -> {
             if (gameTable[1][1].equals(" ")){
                 button5.setText("X");
+                button5.setDisable(true);
                 gameTable[1][1] = "X";
+                crossView5.setFitHeight(20);
+                crossView5.setFitWidth(20);
+                grid.add(crossView5,1,1);
+                userWins();
+                tie();
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
 
-                List<String> list = new ArrayList<>();
-                for (int j = 0; j < gameTable.length; j++){
-                    for (int k = 0; k < gameTable[j].length; k++){
-                        list.add(gameTable[j][k]);
+                if (!isUserWinner) {
+                    List<String> list = new ArrayList<>();
+                    for (int j = 0; j < gameTable.length; j++) {
+                        for (int k = 0; k < gameTable[j].length; k++) {
+                            list.add(gameTable[j][k]);
+                        }
                     }
-                }
 
-                if (list.contains(" ")){
-                    computerMove();
-                    Button buttonO5 = new Button("O");
-                    grid.add(buttonO5,compMoveColumn,compMoveRow);
-                    for (int i =0; i<gameTable.length; i++){
-                        System.out.println(Arrays.toString(gameTable[i]));
+                    if (list.contains(" ")) {
+                        computerMove();
+                        wheelView5.setFitWidth(20);
+                        wheelView5.setFitHeight(20);
+                        grid.add(wheelView5, compMoveColumn, compMoveRow);
+                        for (int i = 0; i < gameTable.length; i++) {
+                            System.out.println(Arrays.toString(gameTable[i]));
+                        }
                     }
-                }else{
-                    status.setText("GAME OVER");
                 }
+                computerWins();
+                tie();
             }
         });
 
         button6.setOnAction((e) -> {
             if (gameTable[1][2].equals(" ")){
                 button6.setText("X");
+                button6.setDisable(true);
                 gameTable[1][2] = "X";
+                crossView6.setFitHeight(20);
+                crossView6.setFitWidth(20);
+                grid.add(crossView6,2,1);
+                userWins();
+                tie();
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
 
-                List<String> list = new ArrayList<>();
-                for (int j = 0; j < gameTable.length; j++){
-                    for (int k = 0; k < gameTable[j].length; k++){
-                        list.add(gameTable[j][k]);
+                if (!isUserWinner) {
+                    List<String> list = new ArrayList<>();
+                    for (int j = 0; j < gameTable.length; j++) {
+                        for (int k = 0; k < gameTable[j].length; k++) {
+                            list.add(gameTable[j][k]);
+                        }
                     }
-                }
 
-                if (list.contains(" ")){
-                    computerMove();
-                    Button buttonO6 = new Button("O");
-                    grid.add(buttonO6,compMoveColumn,compMoveRow);
-                    for (int i =0; i<gameTable.length; i++){
-                        System.out.println(Arrays.toString(gameTable[i]));
+                    if (list.contains(" ")) {
+                        computerMove();
+                        wheelView6.setFitWidth(20);
+                        wheelView6.setFitHeight(20);
+                        grid.add(wheelView6, compMoveColumn, compMoveRow);
+                        for (int i = 0; i < gameTable.length; i++) {
+                            System.out.println(Arrays.toString(gameTable[i]));
+                        }
                     }
-                }else{
-                    status.setText("GAME OVER");
                 }
+                computerWins();
+                tie();
             }
         });
 
         button7.setOnAction((e) -> {
             if (gameTable[2][0].equals(" ")){
                 button7.setText("X");
+                button7.setDisable(true);
                 gameTable[2][0] = "X";
+                crossView7.setFitHeight(20);
+                crossView7.setFitWidth(20);
+                grid.add(crossView7,0,2);
+                userWins();
+                tie();
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
 
-                List<String> list = new ArrayList<>();
-                for (int j = 0; j < gameTable.length; j++){
-                    for (int k = 0; k < gameTable[j].length; k++){
-                        list.add(gameTable[j][k]);
+                if (!isUserWinner) {
+                    List<String> list = new ArrayList<>();
+                    for (int j = 0; j < gameTable.length; j++) {
+                        for (int k = 0; k < gameTable[j].length; k++) {
+                            list.add(gameTable[j][k]);
+                        }
                     }
-                }
 
-                if (list.contains(" ")){
-                    computerMove();
-                    Button buttonO7 = new Button("O");
-                    grid.add(buttonO7,compMoveColumn,compMoveRow);
-                    for (int i =0; i<gameTable.length; i++){
-                        System.out.println(Arrays.toString(gameTable[i]));
+                    if (list.contains(" ")) {
+                        computerMove();
+                        wheelView7.setFitWidth(20);
+                        wheelView7.setFitHeight(20);
+                        grid.add(wheelView7, compMoveColumn, compMoveRow);
+                        for (int i = 0; i < gameTable.length; i++) {
+                            System.out.println(Arrays.toString(gameTable[i]));
+                        }
                     }
-                }else{
-                    status.setText("GAME OVER");
                 }
+                computerWins();
+                tie();
             }
         });
 
         button8.setOnAction((e) -> {
             if (gameTable[2][1].equals(" ")){
                 button8.setText("X");
+                button8.setDisable(true);
                 gameTable[2][1] = "X";
+                crossView8.setFitHeight(20);
+                crossView8.setFitWidth(20);
+                grid.add(crossView8,1,2);
+                userWins();
+                tie();
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
 
-                List<String> list = new ArrayList<>();
-                for (int j = 0; j < gameTable.length; j++){
-                    for (int k = 0; k < gameTable[j].length; k++){
-                        list.add(gameTable[j][k]);
+                if (!isUserWinner) {
+                    List<String> list = new ArrayList<>();
+                    for (int j = 0; j < gameTable.length; j++) {
+                        for (int k = 0; k < gameTable[j].length; k++) {
+                            list.add(gameTable[j][k]);
+                        }
                     }
-                }
 
-                if (list.contains(" ")){
-                    computerMove();
-                    Button buttonO8 = new Button("O");
-                    grid.add(buttonO8,compMoveColumn,compMoveRow);
-                    for (int i =0; i<gameTable.length; i++){
-                        System.out.println(Arrays.toString(gameTable[i]));
+                    if (list.contains(" ")) {
+                        computerMove();
+                        wheelView8.setFitWidth(20);
+                        wheelView8.setFitHeight(20);
+                        grid.add(wheelView8, compMoveColumn, compMoveRow);
+                        for (int i = 0; i < gameTable.length; i++) {
+                            System.out.println(Arrays.toString(gameTable[i]));
+                        }
                     }
-                }else{
-                    status.setText("GAME OVER");
                 }
+                computerWins();
+                tie();
             }
         });
 
         button9.setOnAction((e) -> {
             if (gameTable[2][2].equals(" ")){
                 button9.setText("X");
+                button9.setDisable(true);
                 gameTable[2][2] = "X";
+                crossView9.setFitHeight(20);
+                crossView9.setFitWidth(20);
+                grid.add(crossView9,2,2);
+                userWins();
+                tie();
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
 
-                List<String> list = new ArrayList<>();
-                for (int j = 0; j < gameTable.length; j++){
-                    for (int k = 0; k < gameTable[j].length; k++){
-                        list.add(gameTable[j][k]);
+                if (!isUserWinner) {
+                    List<String> list = new ArrayList<>();
+                    for (int j = 0; j < gameTable.length; j++) {
+                        for (int k = 0; k < gameTable[j].length; k++) {
+                            list.add(gameTable[j][k]);
+                        }
                     }
-                }
 
-                if (list.contains(" ")){
-                    computerMove();
-                    Button buttonO9 = new Button("O");
-                    grid.add(buttonO9,compMoveColumn,compMoveRow);
-                    for (int i =0; i<gameTable.length; i++){
-                        System.out.println(Arrays.toString(gameTable[i]));
+                    if (list.contains(" ")) {
+                        computerMove();
+                        wheelView9.setFitWidth(20);
+                        wheelView9.setFitHeight(20);
+                        grid.add(wheelView9, compMoveColumn, compMoveRow);
+                        for (int i = 0; i < gameTable.length; i++) {
+                            System.out.println(Arrays.toString(gameTable[i]));
+                        }
                     }
-                }else{
-                    status.setText("GAME OVER");
                 }
+                computerWins();
+                tie();
             }
         });
 
@@ -353,6 +558,9 @@ public class Main extends Application {
         gridPaneAll.setBackground(background);
 
         Button newGame = new Button("New Game");
+        newGame.setOnAction((e) -> {
+            restartGame();
+        });
 
         VBox vBox = new VBox(20,status, newGame);
         vBox.setAlignment(Pos.CENTER);
