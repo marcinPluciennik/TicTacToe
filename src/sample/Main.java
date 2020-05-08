@@ -93,7 +93,9 @@ public class Main extends Application {
                 (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals("X")) ||
                 (gameTable[0][2].equals("X") && gameTable[1][2].equals("X") && gameTable[2][2].equals("X")) ||
                 (gameTable[0][0].equals("X") && gameTable[1][1].equals("X") && gameTable[2][2].equals("X")) ||
-                (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals("X"))) {
+                (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals("X")) ||
+                (gameTable[1][0].equals("X") && gameTable[1][1].equals("X") && gameTable[1][2].equals("X") &&
+                        (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals("X")))) {
             status.setText("CONGRATULATION, YOU WON!");
             isUserWinner = true;
             buttonDisable();
@@ -124,10 +126,21 @@ public class Main extends Application {
 
         if (list.contains(" ")){
 
+        }else if ((gameTable[0][0].equals("X") && gameTable[0][1].equals("X") && gameTable[0][2].equals("X")) ||
+                (gameTable[1][0].equals("X") && gameTable[1][1].equals("X") && gameTable[1][2].equals("X")) ||
+                (gameTable[2][0].equals("X") && gameTable[2][1].equals("X") && gameTable[2][2].equals("X")) ||
+                (gameTable[0][0].equals("X") && gameTable[1][0].equals("X") && gameTable[2][0].equals("X")) ||
+                (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals("X")) ||
+                (gameTable[0][2].equals("X") && gameTable[1][2].equals("X") && gameTable[2][2].equals("X")) ||
+                (gameTable[0][0].equals("X") && gameTable[1][1].equals("X") && gameTable[2][2].equals("X")) ||
+                (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals("X")) ||
+                (gameTable[1][0].equals("X") && gameTable[1][1].equals("X") && gameTable[1][2].equals("X") &&
+                        (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals("X")))) {
+            status.setText("CONGRATULATION, YOU WON!");
+            buttonDisable();
         }else{
             status.setText("GAME OVER, TIE!");
             buttonDisable();
-
         }
     }
 
@@ -197,6 +210,7 @@ public class Main extends Application {
 
         buttonAnable();
         isUserWinner = false;
+        status.setText("YOUR TURN - GOOD LUCK!");
     }
 
 
@@ -237,8 +251,9 @@ public class Main extends Application {
                 crossView1.setFitWidth(20);
                 grid.add(crossView1,0,0);
 
-                userWins();
                 tie();
+                userWins();
+
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
@@ -276,8 +291,10 @@ public class Main extends Application {
                 crossView2.setFitHeight(20);
                 crossView2.setFitWidth(20);
                 grid.add(crossView2,1,0);
-                userWins();
+
                 tie();
+                userWins();
+
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
@@ -313,8 +330,10 @@ public class Main extends Application {
                 crossView3.setFitHeight(20);
                 crossView3.setFitWidth(20);
                 grid.add(crossView3,2,0);
-                userWins();
+
                 tie();
+                userWins();
+
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
@@ -350,8 +369,10 @@ public class Main extends Application {
                 crossView4.setFitHeight(20);
                 crossView4.setFitWidth(20);
                 grid.add(crossView4,0,1);
-                userWins();
+
                 tie();
+                userWins();
+
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
@@ -387,8 +408,10 @@ public class Main extends Application {
                 crossView5.setFitHeight(20);
                 crossView5.setFitWidth(20);
                 grid.add(crossView5,1,1);
-                userWins();
+
                 tie();
+                userWins();
+
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
@@ -424,8 +447,10 @@ public class Main extends Application {
                 crossView6.setFitHeight(20);
                 crossView6.setFitWidth(20);
                 grid.add(crossView6,2,1);
-                userWins();
+
                 tie();
+                userWins();
+
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
@@ -461,8 +486,10 @@ public class Main extends Application {
                 crossView7.setFitHeight(20);
                 crossView7.setFitWidth(20);
                 grid.add(crossView7,0,2);
-                userWins();
+
                 tie();
+                userWins();
+
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
@@ -498,8 +525,10 @@ public class Main extends Application {
                 crossView8.setFitHeight(20);
                 crossView8.setFitWidth(20);
                 grid.add(crossView8,1,2);
-                userWins();
+
                 tie();
+                userWins();
+
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
@@ -535,8 +564,10 @@ public class Main extends Application {
                 crossView9.setFitHeight(20);
                 crossView9.setFitWidth(20);
                 grid.add(crossView9,2,2);
-                userWins();
+
                 tie();
+                userWins();
+
                 for (int i =0; i<gameTable.length; i++){
                     System.out.println(Arrays.toString(gameTable[i]));
                 }
