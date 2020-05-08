@@ -127,6 +127,7 @@ public class Main extends Application {
         }else{
             status.setText("GAME OVER, TIE!");
             buttonDisable();
+
         }
     }
 
@@ -169,20 +170,33 @@ public class Main extends Application {
                 gameTable[j][k] = " ";
             }
         }
+        for (int i =0; i<gameTable.length; i++){
+            System.out.println(Arrays.toString(gameTable[i]));
+        }
 
         grid.getChildren().clear();
 
         grid.add(button1, 0,0);
+        button1.setText(" ");
         grid.add(button2, 1,0);
+        button2.setText(" ");
         grid.add(button3, 2,0);
+        button3.setText(" ");
         grid.add(button4, 0,1);
+        button4.setText(" ");
         grid.add(button5, 1,1);
+        button5.setText(" ");
         grid.add(button6, 2,1);
+        button6.setText(" ");
         grid.add(button7, 0,2);
+        button7.setText(" ");
         grid.add(button8, 1,2);
+        button8.setText(" ");
         grid.add(button9, 2,2);
+        button9.setText(" ");
 
         buttonAnable();
+        isUserWinner = false;
     }
 
 
