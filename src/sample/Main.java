@@ -68,15 +68,97 @@ public class Main extends Application {
     }
 
     public void computerMove(){
-        int x = random012();
-        int y = random012();
-        if (gameTable[x][y].equals(" ")){
-            gameTable[x][y] = "O";
-            compMove[0] = x;
-            compMove[1] = y;
+        if (gameTable[0][0].equals("O") && gameTable[0][1].equals("O") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("O") && gameTable[0][2].equals("O") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][1].equals("O") && gameTable[0][2].equals("O") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[1][0].equals("O") && gameTable[1][1].equals("O") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[1][2].equals("O") && gameTable[1][1].equals("O") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("O") && gameTable[2][1].equals("O") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[2][0].equals("O") && gameTable[2][2].equals("O") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[2][2].equals("O") && gameTable[2][1].equals("O") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][0].equals("O") && gameTable[1][0].equals("O") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][0].equals("O") && gameTable[2][0].equals("O") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("O") && gameTable[1][0].equals("O") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[0][1].equals("O") && gameTable[1][1].equals("O") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[1][1].equals("O") && gameTable[2][1].equals("O") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][2].equals("O") && gameTable[1][2].equals("O") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[0][2].equals("O") && gameTable[2][2].equals("O") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[2][2].equals("O") && gameTable[1][2].equals("O") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("O") && gameTable[1][1].equals("O") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[1][1].equals("O") && gameTable[2][2].equals("O") && gameTable[0][0].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[0][2].equals("O") && gameTable[1][1].equals("O") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("O") && gameTable[1][1].equals("O") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
         }else {
-            System.out.println("Szukam ponownie");
-            computerMove();
+            int x = random012();
+            int y = random012();
+            if (gameTable[x][y].equals(" ")) {
+                gameTable[x][y] = "O";
+                compMove[0] = x;
+                compMove[1] = y;
+            } else {
+                System.out.println("Szukam ponownie");
+                computerMove();
+            }
         }
         compMoveRow = compMove[0];
         compMoveColumn = compMove[1];
@@ -93,9 +175,7 @@ public class Main extends Application {
                 (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals("X")) ||
                 (gameTable[0][2].equals("X") && gameTable[1][2].equals("X") && gameTable[2][2].equals("X")) ||
                 (gameTable[0][0].equals("X") && gameTable[1][1].equals("X") && gameTable[2][2].equals("X")) ||
-                (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals("X")) ||
-                (gameTable[1][0].equals("X") && gameTable[1][1].equals("X") && gameTable[1][2].equals("X") &&
-                        (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals("X")))) {
+                (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals("X"))) {
             status.setText("CONGRATULATION, YOU WON!");
             isUserWinner = true;
             buttonDisable();
@@ -133,9 +213,7 @@ public class Main extends Application {
                 (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals("X")) ||
                 (gameTable[0][2].equals("X") && gameTable[1][2].equals("X") && gameTable[2][2].equals("X")) ||
                 (gameTable[0][0].equals("X") && gameTable[1][1].equals("X") && gameTable[2][2].equals("X")) ||
-                (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals("X")) ||
-                (gameTable[1][0].equals("X") && gameTable[1][1].equals("X") && gameTable[1][2].equals("X") &&
-                        (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals("X")))) {
+                (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals("X"))) {
             status.setText("CONGRATULATION, YOU WON!");
             buttonDisable();
         }else{
