@@ -4,8 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -24,7 +23,15 @@ public class Main extends Application {
     private int compMoveRow;
     private int[] compMove = {0,0};
     private boolean isUserWinner = false;
-    GridPane grid = new GridPane();
+    private GridPane grid = new GridPane();
+    private MenuBar menuBar;
+    private Menu gameMenu;
+    private Menu difficultyMenu;
+    private MenuItem exitItem;
+    private MenuItem newGameItem;
+    private RadioMenuItem beginner;
+    private RadioMenuItem normal;
+    private RadioMenuItem expert;
 
     private Button button1 = new Button(" ");
     private Button button2 = new Button(" ");
@@ -291,20 +298,55 @@ public class Main extends Application {
         status.setText("YOUR TURN - GOOD LUCK!");
     }
 
+    private void buildGameMenu(Stage primaryStage){
+        gameMenu = new Menu("File");
+
+        newGameItem = new MenuItem("New game");
+        newGameItem.setOnAction((e) -> {
+            restartGame();
+        });
+
+        exitItem = new MenuItem("Quit game");
+        exitItem.setOnAction((e) -> {
+            primaryStage.close();
+        });
+
+        gameMenu.getItems().add(newGameItem);
+        gameMenu.getItems().add(exitItem);
+    }
+
+    private void buildDifficultyMenu(){
+        difficultyMenu = new Menu("Difficulty");
+
+        beginner = new RadioMenuItem("Beginner");
+        normal = new RadioMenuItem("Normal");
+        expert = new RadioMenuItem("Expert");
+
+        beginner.setSelected(true);
+
+        ToggleGroup difficultyToggleGroup = new ToggleGroup();
+        beginner.setToggleGroup(difficultyToggleGroup);
+        normal.setToggleGroup(difficultyToggleGroup);
+        expert.setToggleGroup(difficultyToggleGroup);
+
+        difficultyMenu.getItems().add(beginner);
+        difficultyMenu.getItems().add(normal);
+        difficultyMenu.getItems().add(expert);
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
         status.setFont(new Font("Arial", 24));
-        status.setTextFill(Color.web("#FFF"));
+        status.setTextFill(Color.web("#000"));
 
-        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true,true, true);
-        BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true,true, false);
+        BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
         Background background = new Background(backgroundImage);
 
         //GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setPadding(new Insets(80,20,10,10));
+        //grid.setPadding(new Insets(0,0,0,0));
         grid.setHgap(150);
         grid.setVgap(150);
         //grid.setBackground(background);
@@ -674,8 +716,8 @@ public class Main extends Application {
         });
 
         GridPane gridPaneAll = new GridPane();
-        gridPaneAll.setAlignment(Pos.TOP_CENTER);
-        gridPaneAll.setPadding(new Insets(20,10,10,20));
+        gridPaneAll.setAlignment(Pos.CENTER);
+        gridPaneAll.setPadding(new Insets(100,10,10,10));
         gridPaneAll.setHgap(10);
         gridPaneAll.setVgap(10);
         gridPaneAll.setBackground(background);
@@ -692,7 +734,20 @@ public class Main extends Application {
         gridPaneAll.add(grid,0,0);
         gridPaneAll.add(vBox,0,1);
 
-        Scene scene = new Scene(gridPaneAll, 600, 700, Color.GREY);
+        menuBar = new MenuBar();
+
+        buildGameMenu(primaryStage);
+        buildDifficultyMenu();
+
+        menuBar.getMenus().add(gameMenu);
+        menuBar.getMenus().add(difficultyMenu);
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setTop(menuBar);
+        borderPane.setCenter(gridPaneAll);
+
+
+        Scene scene = new Scene(borderPane, 600, 750, Color.GRAY);
 
         primaryStage.setTitle("TIC TAC TOE");
         primaryStage.setScene(scene);
