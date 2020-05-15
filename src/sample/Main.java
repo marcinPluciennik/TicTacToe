@@ -717,7 +717,7 @@ public class Main extends Application {
 
         GridPane gridPaneAll = new GridPane();
         gridPaneAll.setAlignment(Pos.CENTER);
-        gridPaneAll.setPadding(new Insets(100,10,10,10));
+        gridPaneAll.setPadding(new Insets(95,10,10,5));
         gridPaneAll.setHgap(10);
         gridPaneAll.setVgap(10);
         gridPaneAll.setBackground(background);
