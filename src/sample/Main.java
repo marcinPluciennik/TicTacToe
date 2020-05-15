@@ -11,13 +11,12 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+
+import java.util.*;
 
 public class Main extends Application {
     private String [][] gameTable = {{" "," "," "},{" "," "," "},{" "," "," "}};
+    private Label level = new Label("Level: BEGINNER");
     private Label status = new Label("YOUR TURN - GOOD LUCK!");
     private int compMoveColumn;
     private int compMoveRow;
@@ -32,6 +31,9 @@ public class Main extends Application {
     private RadioMenuItem beginner;
     private RadioMenuItem normal;
     private RadioMenuItem expert;
+    private boolean beginnerLevel = true;
+    private boolean normalLevel = false;
+    private boolean expertLevel = false;
 
     private Button button1 = new Button(" ");
     private Button button2 = new Button(" ");
@@ -74,7 +76,344 @@ public class Main extends Application {
         return array[index];
     }
 
+    public int random02() {
+        int[] array = {0, 2};
+        int x = new Random().nextInt(array.length);
+        return array[x];
+    }
+
     public void computerMove(){
+        if (gameTable[0][0].equals("O") && gameTable[0][1].equals("O") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("O") && gameTable[0][2].equals("O") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][1].equals("O") && gameTable[0][2].equals("O") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[1][0].equals("O") && gameTable[1][1].equals("O") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[1][2].equals("O") && gameTable[1][1].equals("O") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("O") && gameTable[2][1].equals("O") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[2][0].equals("O") && gameTable[2][2].equals("O") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[2][2].equals("O") && gameTable[2][1].equals("O") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][0].equals("O") && gameTable[1][0].equals("O") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][0].equals("O") && gameTable[2][0].equals("O") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("O") && gameTable[1][0].equals("O") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[0][1].equals("O") && gameTable[1][1].equals("O") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[1][1].equals("O") && gameTable[2][1].equals("O") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][2].equals("O") && gameTable[1][2].equals("O") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[0][2].equals("O") && gameTable[2][2].equals("O") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[2][2].equals("O") && gameTable[1][2].equals("O") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("O") && gameTable[1][1].equals("O") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[1][1].equals("O") && gameTable[2][2].equals("O") && gameTable[0][0].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[0][2].equals("O") && gameTable[1][1].equals("O") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][1].equals("O") && gameTable[2][1].equals("O") && gameTable[1][1].equals(" ")) {
+            gameTable[1][1] = "O";
+            compMove[0] = 1;
+            compMove[1] = 1;
+        } else if (gameTable[2][0].equals("O") && gameTable[1][1].equals("O") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        }else {
+            int x = random012();
+            int y = random012();
+            if (gameTable[x][y].equals(" ")) {
+                gameTable[x][y] = "O";
+                compMove[0] = x;
+                compMove[1] = y;
+            } else {
+                System.out.println("Szukam ponownie");
+                computerMove();
+            }
+        }
+        compMoveRow = compMove[0];
+        compMoveColumn = compMove[1];
+        System.out.println(compMove[0] + " " + compMove[1]);
+        System.out.println("compMoveColumn: " + compMoveColumn);
+        System.out.println("compMoveRow: " + compMoveRow);
+    }
+
+    public void computerMoveNormal() {
+        if (gameTable[1][1].equals(" ")) {
+            gameTable[1][1] = "O";
+            compMove[0] = 1;
+            compMove[1] = 1;
+        } else if (!gameTable[1][1].equals(" ") && gameTable[0][0].equals(" ") && gameTable[0][1].equals(" ") &&
+                gameTable[0][2].equals(" ") && gameTable[1][0].equals(" ") && gameTable[1][2].equals(" ") &&
+                gameTable[2][0].equals(" ") && gameTable[2][1].equals(" ") && gameTable[2][2].equals(" ")) {
+            int x = random012();
+            int y = random012();
+            if (gameTable[x][y].equals(" ")) {
+                gameTable[x][y] = "O";
+                compMove[0] = x;
+                compMove[1] = y;
+            } else {
+                computerMoveNormal();
+            }
+        }
+        compMoveRow = compMove[0];
+        compMoveColumn = compMove[1];
+        System.out.println(compMove[0] + " " + compMove[1]);
+        System.out.println("compMoveColumn: " + compMoveColumn);
+        System.out.println("compMoveRow: " + compMoveRow);
+
+    }
+
+    public void computerMoveNormal2() {
+        if (gameTable[0][0].equals("O") && gameTable[0][1].equals("O") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("O") && gameTable[0][2].equals("O") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][1].equals("O") && gameTable[0][2].equals("O") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[1][0].equals("O") && gameTable[1][1].equals("O") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[1][2].equals("O") && gameTable[1][1].equals("O") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("O") && gameTable[2][1].equals("O") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[2][0].equals("O") && gameTable[2][2].equals("O") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[2][2].equals("O") && gameTable[2][1].equals("O") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][0].equals("O") && gameTable[1][0].equals("O") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("O") && gameTable[2][0].equals("O") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("O") && gameTable[1][0].equals("O") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[0][1].equals("O") && gameTable[1][1].equals("O") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[1][1].equals("O") && gameTable[2][1].equals("O") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][2].equals("O") && gameTable[1][2].equals("O") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[0][2].equals("O") && gameTable[2][2].equals("O") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[2][2].equals("O") && gameTable[1][2].equals("O") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("O") && gameTable[1][1].equals("O") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[1][1].equals("O") && gameTable[2][2].equals("O") && gameTable[0][0].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[0][2].equals("O") && gameTable[1][1].equals("O") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("O") && gameTable[1][1].equals("O") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("X") && gameTable[0][1].equals("X") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("X") && gameTable[0][2].equals("X") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][1].equals("X") && gameTable[0][2].equals("X") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[1][0].equals("X") && gameTable[1][1].equals("X") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[1][2].equals("X") && gameTable[1][1].equals("X") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("X") && gameTable[2][1].equals("X") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[2][0].equals("X") && gameTable[2][2].equals("X") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[2][2].equals("X") && gameTable[2][1].equals("X") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][0].equals("X") && gameTable[1][0].equals("X") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][0].equals("X") && gameTable[2][0].equals("X") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("X") && gameTable[1][0].equals("X") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[1][1].equals("X") && gameTable[2][1].equals("X") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][2].equals("X") && gameTable[1][2].equals("X") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[0][2].equals("X") && gameTable[2][2].equals("X") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[2][2].equals("X") && gameTable[1][2].equals("X") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("X") && gameTable[1][1].equals("X") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[1][1].equals("X") && gameTable[2][2].equals("X") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("X") && gameTable[1][1].equals("X") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else {
+            int x = random012();
+            int y = random012();
+            if (gameTable[x][y].equals(" ")) {
+                gameTable[x][y] = "O";
+                compMove[0] = x;
+                compMove[1] = y;
+            } else {
+                System.out.println("Szukam ponownie");
+                computerMoveNormal2();
+            }
+        }
+        compMoveRow = compMove[0];
+        compMoveColumn = compMove[1];
+        System.out.println(compMove[0] + " " + compMove[1]);
+        System.out.println("compMoveColumn: " + compMoveColumn);
+        System.out.println("compMoveRow: " + compMoveRow);
+    }
+
+    public void computerMoveExpert() {
+        if (gameTable[1][1].equals(" ")) {
+            gameTable[1][1] = "O";
+            compMove[0] = 1;
+            compMove[1] = 1;
+        } else if (gameTable[1][1].equals("X") && gameTable[0][0].equals(" ") && gameTable[0][1].equals(" ") &&
+                gameTable[0][2].equals(" ") && gameTable[1][0].equals(" ") && gameTable[1][2].equals(" ") &&
+                gameTable[2][0].equals(" ") && gameTable[2][1].equals(" ") && gameTable[2][2].equals(" ")) {
+            int x = random02();
+            int y = random02();
+            gameTable[x][y] = "O";
+            compMove[0] = x;
+            compMove[1] = y;
+        }
+        compMoveRow = compMove[0];
+        compMoveColumn = compMove[1];
+        System.out.println(compMove[0] + " " + compMove[1]);
+        System.out.println("compMoveColumn: " + compMoveColumn);
+        System.out.println("compMoveRow: " + compMoveRow);
+    }
+
+    public void computerMoveExpert2() {
         if (gameTable[0][0].equals("O") && gameTable[0][1].equals("O") && gameTable[0][2].equals(" ")) {
             gameTable[0][2] = "O";
             compMove[0] = 0;
@@ -155,6 +494,107 @@ public class Main extends Application {
             gameTable[0][2] = "O";
             compMove[0] = 0;
             compMove[1] = 2;
+        } else if (gameTable[0][0].equals("X") && gameTable[0][1].equals("X") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("X") && gameTable[0][2].equals("X") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][1].equals("X") && gameTable[0][2].equals("X") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[1][0].equals("X") && gameTable[1][1].equals("X") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[1][2].equals("X") && gameTable[1][1].equals("X") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("X") && gameTable[2][1].equals("X") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[2][0].equals("X") && gameTable[2][2].equals("X") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[2][2].equals("X") && gameTable[2][1].equals("X") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][0].equals("X") && gameTable[1][0].equals("X") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[0][0].equals("X") && gameTable[2][0].equals("X") && gameTable[1][0].equals(" ")) {
+            gameTable[1][0] = "O";
+            compMove[0] = 1;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("X") && gameTable[1][0].equals("X") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[0][1].equals("X") && gameTable[1][1].equals("X") && gameTable[2][1].equals(" ")) {
+            gameTable[2][1] = "O";
+            compMove[0] = 2;
+            compMove[1] = 1;
+        } else if (gameTable[1][1].equals("X") && gameTable[2][1].equals("X") && gameTable[0][1].equals(" ")) {
+            gameTable[0][1] = "O";
+            compMove[0] = 0;
+            compMove[1] = 1;
+        } else if (gameTable[0][2].equals("X") && gameTable[1][2].equals("X") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[0][2].equals("X") && gameTable[2][2].equals("X") && gameTable[1][2].equals(" ")) {
+            gameTable[1][2] = "O";
+            compMove[0] = 1;
+            compMove[1] = 2;
+        } else if (gameTable[2][2].equals("X") && gameTable[1][2].equals("X") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[0][0].equals("X") && gameTable[1][1].equals("X") && gameTable[2][2].equals(" ")) {
+            gameTable[2][2] = "O";
+            compMove[0] = 2;
+            compMove[1] = 2;
+        } else if (gameTable[1][1].equals("X") && gameTable[2][2].equals("X") && gameTable[0][0].equals(" ")) {
+            gameTable[0][0] = "O";
+            compMove[0] = 0;
+            compMove[1] = 0;
+        } else if (gameTable[0][2].equals("X") && gameTable[1][1].equals("X") && gameTable[2][0].equals(" ")) {
+            gameTable[2][0] = "O";
+            compMove[0] = 2;
+            compMove[1] = 0;
+        } else if (gameTable[2][0].equals("X") && gameTable[1][1].equals("X") && gameTable[0][2].equals(" ")) {
+            gameTable[0][2] = "O";
+            compMove[0] = 0;
+            compMove[1] = 2;
+        } else if (gameTable[1][1].equals("X") && gameTable[0][0].equals(" ") && gameTable[0][1].equals(" ") &&
+                gameTable[0][2].equals(" ") && gameTable[1][0].equals(" ") && gameTable[1][2].equals(" ") &&
+                gameTable[2][0].equals(" ") && gameTable[2][1].equals(" ") && gameTable[2][2].equals(" ")) {
+            int x = random02();
+            int y = random02();
+            gameTable[x][y] = "O";
+            compMove[0] = x;
+            compMove[1] = y;
+        }else if (gameTable[0][0].equals(" ") || gameTable[0][1].equals(" ") ||
+                gameTable[0][2].equals(" ") || gameTable[1][0].equals(" ") || gameTable[1][2].equals(" ") ||
+                gameTable[2][0].equals(" ") || gameTable[2][1].equals(" ") || gameTable[2][2].equals(" ")){
+            int x = random02();
+            int y = random02();
+            if (gameTable[x][y].equals(" ")){
+                gameTable[x][y] = "O";
+                compMove[0] = x;
+                compMove[1] = y;
+            }else{
+                System.out.println("Szukam ponownie");
+                computerMoveExpert2();
+            }
         }else {
             int x = random012();
             int y = random012();
@@ -164,7 +604,7 @@ public class Main extends Application {
                 compMove[1] = y;
             } else {
                 System.out.println("Szukam ponownie");
-                computerMove();
+                computerMoveExpert2();
             }
         }
         compMoveRow = compMove[0];
@@ -173,6 +613,7 @@ public class Main extends Application {
         System.out.println("compMoveColumn: " + compMoveColumn);
         System.out.println("compMoveRow: " + compMoveRow);
     }
+
 
     public void userWins() {
         if ((gameTable[0][0].equals("X") && gameTable[0][1].equals("X") && gameTable[0][2].equals("X")) ||
@@ -329,6 +770,29 @@ public class Main extends Application {
         normal.setToggleGroup(difficultyToggleGroup);
         expert.setToggleGroup(difficultyToggleGroup);
 
+        beginner.setOnAction((e) -> {
+            beginnerLevel = true;
+            normalLevel = false;
+            expertLevel = false;
+            level.setText("Level: BEGINNER");
+
+        });
+
+        normal.setOnAction((e) -> {
+            normalLevel = true;
+            beginnerLevel = false;
+            expertLevel = false;
+            level.setText("Level: NORMAL");
+        });
+
+        expert.setOnAction((e) -> {
+            normalLevel = false;
+            beginnerLevel = false;
+            expertLevel = true;
+            level.setText("Level: EXPERT");
+
+        });
+
         difficultyMenu.getItems().add(beginner);
         difficultyMenu.getItems().add(normal);
         difficultyMenu.getItems().add(expert);
@@ -337,20 +801,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        status.setFont(new Font("Arial", 24));
+        level.setFont(new Font( "Arial",20));
+        level.setTextFill(Color.web("#000"));
+
+        status.setFont(new Font("Arial", 20));
         status.setTextFill(Color.web("#000"));
 
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true,true, false);
         BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
         Background background = new Background(backgroundImage);
 
-        //GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        //grid.setPadding(new Insets(0,0,0,0));
         grid.setHgap(150);
         grid.setVgap(150);
-        //grid.setBackground(background);
-
 
         grid.add(button1, 0,0);
         grid.add(button2, 1,0);
@@ -386,8 +849,24 @@ public class Main extends Application {
                         }
                     }
 
+                    int occurrencesX = Collections.frequency(list, "X");
+
                     if (list.contains(" ")) {
-                        computerMove();
+                        if (beginnerLevel) {
+                            computerMove();
+                        }else if (normalLevel) {
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveNormal();
+                            } else {
+                                computerMoveNormal2();
+                            }
+                        }else if (expertLevel){
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveExpert();
+                            } else {
+                                computerMoveExpert2();
+                            }
+                        }
                         wheelView1.setFitWidth(20);
                         wheelView1.setFitHeight(20);
                         grid.add(wheelView1, compMoveColumn, compMoveRow);
@@ -398,8 +877,6 @@ public class Main extends Application {
                 }
                 computerWins();
                 tie();
-
-
             }
         });
 
@@ -427,8 +904,24 @@ public class Main extends Application {
                         }
                     }
 
+                    int occurrencesX = Collections.frequency(list, "X");
+
                     if (list.contains(" ")) {
-                        computerMove();
+                        if (beginnerLevel) {
+                            computerMove();
+                        }else if (normalLevel) {
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveNormal();
+                            } else {
+                                computerMoveNormal2();
+                            }
+                        }else if (expertLevel){
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveExpert();
+                            } else {
+                                computerMoveExpert2();
+                            }
+                        }
                         wheelView2.setFitWidth(20);
                         wheelView2.setFitHeight(20);
                         grid.add(wheelView2, compMoveColumn, compMoveRow);
@@ -466,8 +959,24 @@ public class Main extends Application {
                         }
                     }
 
+                    int occurrencesX = Collections.frequency(list, "X");
+
                     if (list.contains(" ")) {
-                        computerMove();
+                        if (beginnerLevel) {
+                            computerMove();
+                        }else if (normalLevel) {
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveNormal();
+                            } else {
+                                computerMoveNormal2();
+                            }
+                        }else if (expertLevel){
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveExpert();
+                            } else {
+                                computerMoveExpert2();
+                            }
+                        }
                         wheelView3.setFitWidth(20);
                         wheelView3.setFitHeight(20);
                         grid.add(wheelView3, compMoveColumn, compMoveRow);
@@ -505,8 +1014,24 @@ public class Main extends Application {
                         }
                     }
 
+                    int occurrencesX = Collections.frequency(list, "X");
+
                     if (list.contains(" ")) {
-                        computerMove();
+                        if (beginnerLevel) {
+                            computerMove();
+                        }else if (normalLevel) {
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveNormal();
+                            } else {
+                                computerMoveNormal2();
+                            }
+                        }else if (expertLevel){
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveExpert();
+                            } else {
+                                computerMoveExpert2();
+                            }
+                        }
                         wheelView4.setFitWidth(20);
                         wheelView4.setFitHeight(20);
                         grid.add(wheelView4, compMoveColumn, compMoveRow);
@@ -544,8 +1069,24 @@ public class Main extends Application {
                         }
                     }
 
+                    int occurrencesX = Collections.frequency(list, "X");
+
                     if (list.contains(" ")) {
-                        computerMove();
+                        if (beginnerLevel) {
+                            computerMove();
+                        }else if (normalLevel) {
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveNormal();
+                            } else {
+                                computerMoveNormal2();
+                            }
+                        }else if (expertLevel){
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveExpert();
+                            } else {
+                                computerMoveExpert2();
+                            }
+                        }
                         wheelView5.setFitWidth(20);
                         wheelView5.setFitHeight(20);
                         grid.add(wheelView5, compMoveColumn, compMoveRow);
@@ -583,8 +1124,24 @@ public class Main extends Application {
                         }
                     }
 
+                    int occurrencesX = Collections.frequency(list, "X");
+
                     if (list.contains(" ")) {
-                        computerMove();
+                        if (beginnerLevel) {
+                            computerMove();
+                        }else if (normalLevel) {
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveNormal();
+                            } else {
+                                computerMoveNormal2();
+                            }
+                        }else if (expertLevel){
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveExpert();
+                            } else {
+                                computerMoveExpert2();
+                            }
+                        }
                         wheelView6.setFitWidth(20);
                         wheelView6.setFitHeight(20);
                         grid.add(wheelView6, compMoveColumn, compMoveRow);
@@ -622,8 +1179,24 @@ public class Main extends Application {
                         }
                     }
 
+                    int occurrencesX = Collections.frequency(list, "X");
+
                     if (list.contains(" ")) {
-                        computerMove();
+                        if (beginnerLevel) {
+                            computerMove();
+                        }else if (normalLevel) {
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveNormal();
+                            } else {
+                                computerMoveNormal2();
+                            }
+                        }else if (expertLevel){
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveExpert();
+                            } else {
+                                computerMoveExpert2();
+                            }
+                        }
                         wheelView7.setFitWidth(20);
                         wheelView7.setFitHeight(20);
                         grid.add(wheelView7, compMoveColumn, compMoveRow);
@@ -661,8 +1234,24 @@ public class Main extends Application {
                         }
                     }
 
+                    int occurrencesX = Collections.frequency(list, "X");
+
                     if (list.contains(" ")) {
-                        computerMove();
+                        if (beginnerLevel) {
+                            computerMove();
+                        }else if (normalLevel) {
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveNormal();
+                            } else {
+                                computerMoveNormal2();
+                            }
+                        }else if (expertLevel){
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveExpert();
+                            } else {
+                                computerMoveExpert2();
+                            }
+                        }
                         wheelView8.setFitWidth(20);
                         wheelView8.setFitHeight(20);
                         grid.add(wheelView8, compMoveColumn, compMoveRow);
@@ -700,8 +1289,24 @@ public class Main extends Application {
                         }
                     }
 
+                    int occurrencesX = Collections.frequency(list, "X");
+
                     if (list.contains(" ")) {
-                        computerMove();
+                        if (beginnerLevel) {
+                            computerMove();
+                        }else if (normalLevel) {
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveNormal();
+                            } else {
+                                computerMoveNormal2();
+                            }
+                        }else if (expertLevel){
+                            if (occurrencesX == 1 || occurrencesX == 0) {
+                                computerMoveExpert();
+                            } else {
+                                computerMoveExpert2();
+                            }
+                        }
                         wheelView9.setFitWidth(20);
                         wheelView9.setFitHeight(20);
                         grid.add(wheelView9, compMoveColumn, compMoveRow);
@@ -727,7 +1332,7 @@ public class Main extends Application {
             restartGame();
         });
 
-        VBox vBox = new VBox(20,status, newGame);
+        VBox vBox = new VBox(20,level, status, newGame);
         vBox.setAlignment(Pos.CENTER);
         vBox.setPadding((new Insets(100)));
 
@@ -747,7 +1352,7 @@ public class Main extends Application {
         borderPane.setCenter(gridPaneAll);
 
 
-        Scene scene = new Scene(borderPane, 600, 750, Color.GRAY);
+        Scene scene = new Scene(borderPane, 600, 750);
 
         primaryStage.setTitle("TIC TAC TOE");
         primaryStage.setScene(scene);
