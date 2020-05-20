@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.*;
@@ -17,7 +18,7 @@ import java.util.*;
 public class Main extends Application {
     private String [][] gameTable = {{" "," "," "},{" "," "," "},{" "," "," "}};
     private Label level = new Label("Level: BEGINNER");
-    private Label status = new Label("YOUR TURN - GOOD LUCK!");
+    private Label status = new Label("YOUR TURN- GOOD LUCK!");
     private int compMoveColumn;
     private int compMoveRow;
     private int[] compMove = {0,0};
@@ -34,6 +35,9 @@ public class Main extends Application {
     private boolean beginnerLevel = true;
     private boolean normalLevel = false;
     private boolean expertLevel = false;
+    private String userName;
+    private TextField name;
+    private Label statusWelcomeWindow = new Label("Are you ready?");
 
     private Button button1 = new Button(" ");
     private Button button2 = new Button(" ");
@@ -1357,6 +1361,45 @@ public class Main extends Application {
         primaryStage.setTitle("TIC TAC TOE");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        //---------------------------------
+        Label enterYourName = new Label("ENTER YOUR NAME:");
+        name = new TextField();
+
+        statusWelcomeWindow.setFont(new Font("Arial", 15));
+
+        Button save = new Button("Save");
+        save.setOnAction((e) -> {
+            userName = name.getText();
+            if (userName.length() > 0 && userName.length() <= 10){
+                Stage newWindow = (Stage) save.getScene().getWindow();
+                newWindow.close();
+            }else if(userName.length() > 10){
+                statusWelcomeWindow.setText("Sorry! 1-10 characters!");
+                name.clear();
+            }else{
+                statusWelcomeWindow.setText("Sorry! 1-10 characters!");
+            }
+
+        });
+
+        Button clear = new Button("Clear");
+        clear.setOnAction((e) -> {
+            name.clear();
+        });
+
+        VBox enterUserName = new VBox(10, enterYourName, name, statusWelcomeWindow, save, clear);
+        enterUserName.setAlignment(Pos.CENTER);
+        enterUserName.setPadding(new Insets(10));
+
+        Scene scene2 = new Scene(enterUserName, 250, 250);
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Welcome!");
+        newWindow.setScene(scene2);
+        newWindow.initModality(Modality.WINDOW_MODAL);
+        newWindow.initOwner(primaryStage);
+        newWindow.show();
+
     }
 
     public static void main(String[] args) {
