@@ -73,18 +73,7 @@ public class Main extends Application {
     private ImageView crossView8 = new ImageView(cross);
     private ImageView crossView9 = new ImageView(cross);
 
-    public int random012(){
-        int [] array = {0,1,2};
-        int index = new Random().nextInt(array.length);
-        System.out.println("Random: " + array[index]);
-        return array[index];
-    }
-
-    public int random02() {
-        int[] array = {0, 2};
-        int x = new Random().nextInt(array.length);
-        return array[x];
-    }
+    RandomIndex randomIndex = new RandomIndex();
 
     public void computerMove(){
         if (gameTable[0][0].equals("O") && gameTable[0][1].equals("O") && gameTable[0][2].equals(" ")) {
@@ -172,8 +161,8 @@ public class Main extends Application {
             compMove[0] = 0;
             compMove[1] = 2;
         }else {
-            int x = random012();
-            int y = random012();
+            int x = randomIndex.random012();
+            int y = randomIndex.random012();
             if (gameTable[x][y].equals(" ")) {
                 gameTable[x][y] = "O";
                 compMove[0] = x;
@@ -198,8 +187,8 @@ public class Main extends Application {
         } else if (!gameTable[1][1].equals(" ") && gameTable[0][0].equals(" ") && gameTable[0][1].equals(" ") &&
                 gameTable[0][2].equals(" ") && gameTable[1][0].equals(" ") && gameTable[1][2].equals(" ") &&
                 gameTable[2][0].equals(" ") && gameTable[2][1].equals(" ") && gameTable[2][2].equals(" ")) {
-            int x = random012();
-            int y = random012();
+            int x = randomIndex.random012();
+            int y = randomIndex.random012();
             if (gameTable[x][y].equals(" ")) {
                 gameTable[x][y] = "O";
                 compMove[0] = x;
@@ -378,8 +367,8 @@ public class Main extends Application {
             compMove[0] = 0;
             compMove[1] = 2;
         } else {
-            int x = random012();
-            int y = random012();
+            int x = randomIndex.random012();
+            int y = randomIndex.random012();
             if (gameTable[x][y].equals(" ")) {
                 gameTable[x][y] = "O";
                 compMove[0] = x;
@@ -404,8 +393,8 @@ public class Main extends Application {
         } else if (gameTable[1][1].equals("X") && gameTable[0][0].equals(" ") && gameTable[0][1].equals(" ") &&
                 gameTable[0][2].equals(" ") && gameTable[1][0].equals(" ") && gameTable[1][2].equals(" ") &&
                 gameTable[2][0].equals(" ") && gameTable[2][1].equals(" ") && gameTable[2][2].equals(" ")) {
-            int x = random02();
-            int y = random02();
+            int x = randomIndex.random02();
+            int y = randomIndex.random02();
             gameTable[x][y] = "O";
             compMove[0] = x;
             compMove[1] = y;
@@ -581,16 +570,16 @@ public class Main extends Application {
         } else if (gameTable[1][1].equals("X") && gameTable[0][0].equals(" ") && gameTable[0][1].equals(" ") &&
                 gameTable[0][2].equals(" ") && gameTable[1][0].equals(" ") && gameTable[1][2].equals(" ") &&
                 gameTable[2][0].equals(" ") && gameTable[2][1].equals(" ") && gameTable[2][2].equals(" ")) {
-            int x = random02();
-            int y = random02();
+            int x = randomIndex.random02();
+            int y = randomIndex.random02();
             gameTable[x][y] = "O";
             compMove[0] = x;
             compMove[1] = y;
         }else if (gameTable[0][0].equals(" ") || gameTable[0][1].equals(" ") ||
                 gameTable[0][2].equals(" ") || gameTable[1][0].equals(" ") || gameTable[1][2].equals(" ") ||
                 gameTable[2][0].equals(" ") || gameTable[2][1].equals(" ") || gameTable[2][2].equals(" ")){
-            int x = random02();
-            int y = random02();
+            int x = randomIndex.random02();
+            int y = randomIndex.random02();
             if (gameTable[x][y].equals(" ")){
                 gameTable[x][y] = "O";
                 compMove[0] = x;
@@ -600,8 +589,8 @@ public class Main extends Application {
                 computerMoveExpert2();
             }
         }else {
-            int x = random012();
-            int y = random012();
+            int x = randomIndex.random012();
+            int y = randomIndex.random012();
             if (gameTable[x][y].equals(" ")) {
                 gameTable[x][y] = "O";
                 compMove[0] = x;
